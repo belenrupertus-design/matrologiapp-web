@@ -441,6 +441,14 @@ footer{
   .contact-box{
     padding:36px;
   }
+
+  @media(max-width:640px){
+
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+
+}
 }
 </style>
 </head>
@@ -515,6 +523,63 @@ footer{
   "
 />
 </div>
+
+  </div>
+
+</section>
+
+<section
+  style="
+    padding-top:20px;
+  "
+>
+
+  <div
+    style="
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    "
+  >
+
+    <article
+      class="card"
+      style="
+        text-align:center;
+        background:#ead8f5;
+      "
+    >
+
+      <h2 class="stat-number" data-target="1000">0</h2>
+<p>preguntas interactivas</p>
+
+    </article>
+
+    <article
+      class="card"
+      style="
+        text-align:center;
+        background:#e9c6e7;
+      "
+    >
+
+      <h2 class="stat-number" data-target="360">0</h2>
+<p>medicamentos abordados</p>
+
+    </article>
+
+    <article
+      class="card"
+      style="
+        text-align:center;
+        background:#efe3b7;
+      "
+    >
+
+      <h2 class="stat-number" data-target="5">0</h2>
+<p>módulos clínicos</p>
+
+    </article>
 
   </div>
 
@@ -1011,6 +1076,43 @@ footer{
 <footer>
   © 2026 Matrologiapp. Todos los derechos reservados.
 </footer>
+<script>
+  const counters = document.querySelectorAll(".stat-number");
 
+  const animateCounter = (counter) => {
+    const target = Number(counter.dataset.target);
+    let current = 0;
+    const increment = Math.ceil(target / 80);
+
+    const updateCounter = () => {
+      current += increment;
+
+      if (current >= target) {
+        counter.textContent = counter.classList.contains("no-plus")
+  ? target
+  : target + "+";
+      } else {
+        counter.textContent = current + "+";
+        requestAnimationFrame(updateCounter);
+      }
+    };
+
+    updateCounter();
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  counters.forEach((counter) => observer.observe(counter));
+</script>
 </body>
 </html>
