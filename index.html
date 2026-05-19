@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Matrologiapp | Farmacología aplicada a la matronería</title>
+
+  <meta
+    name="description"
+    content="Aplicación educativa de farmacología aplicada a la matronería."
+  />
+
+  <style>
+    :root {
+      --primary: #5b3e8c;
+      --primary-dark: #2a243d;
+      --primary-soft: #8b6fc0;
+
+      --rose: #e7b6d5;
+      --rose-soft: #f6d6e8;
+
+      --lavender: #f9f5ff;
+      --lavender-2: #efe5fb;
+
+      --cream: #fffafd;
+
+      --white: #ffffff;
+
+      --text: #2d2638;
+      --muted: #6f647b;
+
+      --border: #eadff4;
+
+      --shadow: rgba(49, 34, 73, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+
+      background:
+        radial-gradient(circle at top left, var(--rose-soft) 0, transparent 32%),
+        linear-gradient(180deg, var(--lavender) 0%, var(--cream) 100%);
+
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+
+      background: rgba(255, 250, 253, 0.92);
+      backdrop-filter: blur(10px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+
+      padding: 18px 24px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+
+      padding: 90px 24px 60px;
+
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+
+      gap: 40px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+
+      padding: 8px 14px;
+
+      background: var(--rose-soft);
+
+      color: var(--primary);
+
+      border-radius: 999px;
+
+      font-size: 0.85rem;
+      font-weight: 700;
+
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 1.05;
+
+      margin-bottom: 20px;
+
+      color: var(--primary-dark);
+
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.12rem;
+
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 14px 20px;
+
+      border-radius: 14px;
+
+      font-weight: 800;
+
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(91, 62, 140, 0.25);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--primary);
+    }
+
+    .phone-card {
+      background: linear-gradient(
+        145deg,
+        var(--white),
+        var(--lavender-2)
+      );
+
+      border-radius: 36px;
+
+      padding: 18px;
+
+      border: 1px solid var(--border);
+
+      box-shadow: 0 24px 60px var(--shadow);
+    }
+
+    .phone-placeholder {
+      min-height: 540px;
+
+      border-radius: 28px;
+
+      background: linear-gradient(
+        180deg,
+        var(--primary),
+        var(--primary-dark)
+      );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      color: var(--white);
+
+      padding: 24px;
+
+      font-weight: 700;
+    }
+
+    section {
+      max-width: 1120px;
+      margin: 0 auto;
+
+      padding: 64px 24px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+
+      color: var(--primary-dark);
+
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+
+      max-width: 760px;
+
+      margin-bottom: 34px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--white);
+
+      border: 1px solid var(--border);
+
+      border-radius: 24px;
+
+      padding: 24px;
+
+      box-shadow: 0 12px 28px var(--shadow);
+    }
+
+    .card h3 {
+      color: var(--primary);
+
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    .card ul {
+      padding-left: 18px;
+      margin-top: 12px;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 18px;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 900;
+
+      color: var(--primary-dark);
+
+      margin: 10px 0;
+    }
+
+    .highlight {
+      border: 2px solid var(--primary);
+      transform: scale(1.02);
+    }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 16px;
+    }
+
+    .screenshot-box {
+      min-height: 360px;
+
+      border-radius: 24px;
+
+      border: 2px dashed #cdb8de;
+
+      background: #fffafd;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-weight: 700;
+
+      padding: 16px;
+    }
+
+    .faq-item {
+      background: var(--white);
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      border: 1px solid var(--border);
+
+      margin-bottom: 12px;
+    }
+
+    .faq-item h3 {
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+
+    .documents {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 18px;
+    }
+
+    .contact-box {
+      background: linear-gradient(
+        135deg,
+        var(--primary-dark),
+        var(--primary)
+      );
+
+      color: var(--white);
+
+      border-radius: 30px;
+
+      padding: 36px;
+
+      display: grid;
+      grid-template-columns: 1fr auto;
+
+      gap: 24px;
+
+      align-items: center;
+    }
+
+    footer {
+      text-align: center;
+
+      padding: 34px 24px;
+
+      color: var(--muted);
+
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .grid,
+      .pricing,
+      .screenshots,
+      .documents {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .grid,
+      .pricing,
+      .screenshots,
+      .documents {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#inicio" class="logo">Matrologiapp</a>
+
+    <div class="nav-links">
+      <a href="#que-es">Qué es</a>
+      <a href="#modulos">Módulos</a>
+      <a href="#valores">Planes</a>
+      <a href="#capturas">Capturas</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<section id="inicio" class="hero">
+
+  <div>
+
+    <span class="badge">
+      Farmacología aplicada a la matronería
+    </span>
+
+    <h1>
+      Aprende farmacología de forma interactiva y clínica.
+    </h1>
+
+    <p>
+      Matrologiapp es una aplicación educativa diseñada para
+      estudiantes y profesionales de matronería que desean
+      fortalecer conocimientos farmacológicos mediante preguntas
+      progresivas, gamificación y casos clínicos.
+    </p>
+
+    <div class="buttons">
+
+      <a
+        class="btn btn-primary"
+        href="https://drive.google.com/file/d/123gK3p6thzN8-FbnWw5I5QtOlVoC-lil/view?usp=sharing"
+        target="_blank"
+      >
+        Descargar APK
+      </a>
+
+      <a class="btn btn-secondary" href="#valores">
+        Ver planes
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="phone-card">
+
+    <div class="phone-placeholder">
+
+      Subir aquí captura principal real de la app
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="que-es">
+
+  <h2 class="section-title">
+    Qué es Matrologiapp
+  </h2>
+
+  <p class="section-subtitle">
+    Plataforma educativa enfocada en farmacología aplicada
+    a ginecología, obstetricia, neonatología, APS y salud mental.
+  </p>
+
+  <div class="grid">
+
+    <article class="card">
+      <h3>Aprendizaje progresivo</h3>
+      <p>
+        Sistema Beginner, Intermediate y Expert.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Gamificación</h3>
+      <p>
+        Vidas, streaks, ranking y progreso interactivo.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Enfoque clínico</h3>
+      <p>
+        Casos clínicos y razonamiento farmacológico aplicado.
+      </p>
+    </article>
+
+  </div>
+
+</section>
+
+<section id="modulos">
+
+  <h2 class="section-title">
+    Módulos
+  </h2>
+
+  <p class="section-subtitle">
+    Todos los módulos incluidos en la plataforma.
+  </p>
+
+  <div class="grid">
+
+    <article class="card">
+      <h3>Ginecología</h3>
+    </article>
+
+    <article class="card">
+      <h3>Obstetricia</h3>
+    </article>
+
+    <article class="card">
+      <h3>Neonatología</h3>
+    </article>
+
+    <article class="card">
+      <h3>APS</h3>
+    </article>
+
+    <article class="card">
+      <h3>Salud Mental</h3>
+    </article>
+
+  </div>
+
+</section>
+
+<section id="valores">
+
+  <h2 class="section-title">
+    Planes y suscripciones
+  </h2>
+
+  <p class="section-subtitle">
+    Elige el plan ideal para tu aprendizaje.
+  </p>
+
+  <div class="pricing">
+
+    <article class="card">
+
+      <h3>Plan Beginner</h3>
+
+      <div class="price">
+        $4.990 CLP
+      </div>
+
+      <p><strong>/ mes</strong></p>
+
+      <ul>
+        <li>Acceso a los 5 módulos</li>
+        <li>Nivel Beginner completo</li>
+        <li>Banco de preguntas</li>
+        <li>Gamificación y progreso</li>
+        <li>Streaks, vidas y ranking</li>
+        <li>Actualizaciones de contenido</li>
+      </ul>
+
+    </article>
+
+    <article class="card highlight">
+
+      <h3>Plan Premium</h3>
+
+      <div class="price">
+        $9.990 CLP
+      </div>
+
+      <p><strong>/ mes</strong></p>
+
+      <ul>
+        <li>Todo lo del Beginner</li>
+        <li>Intermediate y Expert</li>
+        <li>Casos clínicos avanzados</li>
+        <li>Mayor complejidad</li>
+        <li>Seguimiento de rendimiento</li>
+        <li>Estadísticas</li>
+        <li>Experiencia premium completa</li>
+      </ul>
+
+    </article>
+
+    <article class="card">
+
+      <h3>Prueba gratuita</h3>
+
+      <div class="price">
+        7 días
+      </div>
+
+      <p>
+        No requiere tarjeta bancaria.
+      </p>
+
+    </article>
+
+  </div>
+
+  <div class="card" style="margin-top: 18px;">
+
+    <h3>Compras adicionales</h3>
+
+    <div class="grid" style="margin-top: 20px;">
+
+      <article class="card">
+
+        <h3>Pack 3 vidas</h3>
+
+        <div class="price">
+          $1.990 CLP
+        </div>
+
+      </article>
+
+      <article class="card">
+
+        <h3>Pack 10 vidas</h3>
+
+        <div class="price">
+          $4.990 CLP
+        </div>
+
+      </article>
+
+      <article class="card">
+
+        <h3>Importante</h3>
+
+        <p>
+          Las vidas corresponden a elementos digitales
+          consumibles dentro de la plataforma y no son reembolsables.
+        </p>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="capturas">
+
+  <h2 class="section-title">
+    Capturas reales de la app
+  </h2>
+
+  <div class="screenshots">
+
+    <div class="screenshot-box">
+      Captura 1
+    </div>
+
+    <div class="screenshot-box">
+      Captura 2
+    </div>
+
+    <div class="screenshot-box">
+      Captura 3
+    </div>
+
+    <div class="screenshot-box">
+      Captura 4
+    </div>
+
+  </div>
+
+</section>
+
+<section id="faq">
+
+  <h2 class="section-title">
+    FAQ
+  </h2>
+
+  <div class="faq-item">
+    <h3>¿La app reemplaza enseñanza universitaria?</h3>
+    <p>
+      No. Es una herramienta complementaria de estudio.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <h3>¿Quién puede usarla?</h3>
+    <p>
+      Estudiantes y profesionales de matronería.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <h3>¿Tiene prueba gratuita?</h3>
+    <p>
+      Sí, 7 días sin tarjeta bancaria.
+    </p>
+  </div>
+
+</section>
+
+<section id="documentos">
+
+  <h2 class="section-title">
+    Documentos legales
+  </h2>
+
+  <div class="documents">
+
+    <article class="card">
+
+      <h3>Términos y Condiciones</h3>
+
+      <br />
+
+      <a
+        class="btn btn-secondary"
+        href="/terminos-y-condiciones.pdf"
+        target="_blank"
+      >
+        Ver documento
+      </a>
+
+    </article>
+
+    <article class="card">
+
+      <h3>Política de Privacidad</h3>
+
+      <br />
+
+      <a
+        class="btn btn-secondary"
+        href="/politica-de-privacidad.pdf"
+        target="_blank"
+      >
+        Ver documento
+      </a>
+
+    </article>
+
+  </div>
+
+</section>
+
+<section id="contacto">
+
+  <div class="contact-box">
+
+    <div>
+
+      <h2>Contacto</h2>
+
+      <p>
+        Consultas, convenios y soporte.
+      </p>
+
+      <p>
+        <strong>Email:</strong>
+        contacto@matronautista.cl
+      </p>
+
+      <p>
+        <strong>WhatsApp:</strong>
+        +56 9 7569 5458
+      </p>
+
+    </div>
+
+    <div class="buttons">
+
+      <a
+        class="btn btn-primary"
+        href="mailto:contacto@matronautista.cl"
+      >
+        Enviar correo
+      </a>
+
+      <a
+        class="btn btn-secondary"
+        href="https://wa.me/56975695458"
+        target="_blank"
+      >
+        WhatsApp
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  © 2026 Matrologiapp. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
