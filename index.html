@@ -47,9 +47,29 @@ html{
 
 body{
   font-family: Arial, Helvetica, sans-serif;
-  background:var(--bg);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255,255,255,.65),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      180deg,
+      #fbf8fe 0%,
+      #f5eefc 15%,
+      #ecddf8 35%,
+      #e1cef3 55%,
+      #d2b7ea 78%,
+      #c39ddd 100%
+    );
+
   color:var(--text);
+
   overflow-x:hidden;
+
+  min-height:100vh;
 }
 
 a{
